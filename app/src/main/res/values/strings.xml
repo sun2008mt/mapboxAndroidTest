@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MapboxGLTest</string>
+    <string name="access_token">pk.eyJ1Ijoic3VuMjAwODA4MDhtdCIsImEiOiJjajBubHRwejUwMDBkMnd0YWJqY3FkdXIwIn0.VWGcnJNQ-yrTEvpB6kAR3w</string>
+    <string name="mapbox_style_mapbox_outdoors">mapbox://styles/mapbox/outdoors-v9</string>
+</resources>
