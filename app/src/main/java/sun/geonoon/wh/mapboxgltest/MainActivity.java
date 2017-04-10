@@ -8,9 +8,12 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.BackgroundLayer;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,15 +31,25 @@ public class MainActivity extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                RasterSource webMapSource = new RasterSource(
-                        "web-map-source",
-                        new TileSet("tileset", "http://webrd01.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8"), 256
+                RasterSource outdoorMapSource = new RasterSource(
+                        "outdoor",
+                        new TileSet("outdoor", "http://webrd01.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8"), 256
                 );
 
-                mapboxMap.addSource(webMapSource);
+                VectorSource indoorMapSource = new VectorSource(
+                        "indoor",
+                        new TileSet("indoor", "http://192.168.1.220:3333/data/indoor/{z}/{x}/{y}.pbf"));
 
-                RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
-                mapboxMap.addLayer(webMapLayer);
+                mapboxMap.addSource(outdoorMapSource);
+                mapboxMap.addSource(indoorMapSource);
+
+                BackgroundLayer backgroundLayer = new BackgroundLayer("background");
+                RasterLayer outdoorMapLayer = new RasterLayer("outdoor", "outdoor");
+                FillLayer floorLayer = new FillLayer("-1_fl", "-1_fl");
+
+                mapboxMap.addLayer(backgroundLayer);
+                mapboxMap.addLayer(outdoorMapLayer);
+                mapboxMap.addLayer(floorLayer);
             }
         });
     }

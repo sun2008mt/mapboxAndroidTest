@@ -10,10 +10,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.6892"
-        mapbox:mapbox_cameraTargetLng="-74.5447"
+        mapbox:mapbox_cameraTargetLat="430.52"
+        mapbox:mapbox_cameraTargetLng="114.31"
         mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
-        mapbox:mapbox_cameraZoom="8"/>
+        mapbox:mapbox_cameraZoom="10"/>
 
 </LinearLayout>
 
